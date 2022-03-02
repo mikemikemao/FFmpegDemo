@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
 import com.hikvision.ffmpegdemo.adapter.SelectItem;
 import com.hikvision.ffmpegdemo.adapter.SelectItemAdapter;
@@ -18,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ((TextView)findViewById(R.id.text_title)).setText("FFmpeg Version "+ZZFFmpeg.GetFFmpegVersion());
         initItems();
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -27,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initItems() {
-        SelectItem foregroundItem = new SelectItem("foreground", R.drawable.ic_launcher_foreground);
+        SelectItem foregroundItem = new SelectItem("ANativeWinodow player", R.drawable.lufei);
         selectItemList.add(foregroundItem);
 
     }
