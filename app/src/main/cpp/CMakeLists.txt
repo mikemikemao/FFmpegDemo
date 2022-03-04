@@ -10,6 +10,7 @@ include_directories(
         include
         glm
         common
+        ${CMAKE_SOURCE_DIR}/v4l2
         ${CMAKE_SOURCE_DIR}/recorder
         ${CMAKE_SOURCE_DIR}/util
         ${CMAKE_SOURCE_DIR}/player
@@ -23,11 +24,11 @@ link_directories(
 
 file(GLOB src-files
         ${CMAKE_SOURCE_DIR}/*.cpp
+        ${CMAKE_SOURCE_DIR}/v4l2/*.cpp
         )
 
 add_library( # Sets the name of the library.
              ${libname}
-
              # Sets the library as a shared library.
              SHARED
 
@@ -100,7 +101,6 @@ set(native-libs
 
 target_link_libraries( # Specifies the target library.
                        ${libname}
-
                        # Links the target library to the log library
                        # included in the NDK.
                        ${log-lib}

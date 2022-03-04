@@ -8,6 +8,8 @@
 
 #include "jni.h"
 #include "util/LogUtil.h"
+#include <vector>
+#include <string>
 extern "C" {
 #include <libavcodec/version.h>
 #include <libavcodec/avcodec.h>
@@ -30,6 +32,7 @@ JNICALL Java_com_hikvision_ffmpegdemo_ZZFFmpeg_native_1GetFFmpegVersion
     strcat(strBuffer,av_version_info());
     return env->NewStringUTF(strBuffer);
 }
+
 
 
 
