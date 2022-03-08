@@ -8,6 +8,7 @@
 
 #include "DecoderBase.h"
 #include "VideoRender.h"
+#include "SingleVideoRecorder.h"
 
 class VideoDecoder : public DecoderBase{
 
@@ -37,6 +38,7 @@ private:
     int m_RenderWidth = 0;
     int m_RenderHeight = 0;
     VideoRender *m_VideoRender = nullptr;
+    SingleVideoRecorder *m_pVideoRecorder = nullptr;
 };
 
 

@@ -16,6 +16,10 @@ public:
         UnInit();
     }
 
+protected:
+    virtual void OnDecoderReady();
+    virtual void OnDecoderDone();
+
 };
 
 

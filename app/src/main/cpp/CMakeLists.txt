@@ -17,7 +17,8 @@ include_directories(
         ${CMAKE_SOURCE_DIR}/player/decoder
         ${CMAKE_SOURCE_DIR}/player/render
         ${CMAKE_SOURCE_DIR}/player/render/audio
-        ${CMAKE_SOURCE_DIR}/player/render/video)
+        ${CMAKE_SOURCE_DIR}/player/render/video
+        ${CMAKE_SOURCE_DIR}/recorder)
 
 link_directories(
         ${jnilibs}/${ANDROID_ABI})
@@ -31,6 +32,7 @@ file(GLOB src-files
         ${CMAKE_SOURCE_DIR}/player/render/*.cpp
         ${CMAKE_SOURCE_DIR}/player/render/audio/*.cpp
         ${CMAKE_SOURCE_DIR}/player/render/video/*.cpp
+        ${CMAKE_SOURCE_DIR}/recorder/*.cpp
         )
 
 add_library( # Sets the name of the library.
