@@ -7,9 +7,11 @@
  * */
 
 #include <jni.h>
+#define  LOG_TAG "learn_ffmpeg"
 #include "util/LogUtil.h"
 #include <vector>
 #include <string>
+#include "PlayerWrapper.h"
 extern "C" {
 #include <libavcodec/version.h>
 #include <libavcodec/avcodec.h>
@@ -24,8 +26,6 @@ extern "C" {
 extern "C" {
 #endif
 
-#define  LOG_TAG "learn_ffmpeg"
-
 JNIEXPORT jstring
 JNICALL Java_com_hikvision_ffmpegdemo_ZZFFmpeg_native_1getFFmpegVersion
         (JNIEnv *env, jclass cls)
@@ -35,7 +35,20 @@ JNICALL Java_com_hikvision_ffmpegdemo_ZZFFmpeg_native_1getFFmpegVersion
     return env->NewStringUTF(strBuffer);
 }
 
-
+/*
+ * Class:     com_byteflow_learnffmpeg_media_FFMediaPlayer
+ * Method:    native_Init
+ * Signature: (JLjava/lang/String;Ljava/lang/Object;)J
+ */
+JNIEXPORT jlong JNICALL Java_com_hikvision_ffmpegdemo_ZZFFmpeg_native_1Init
+        (JNIEnv *env, jobject obj, jstring jurl, int playerType, jint renderType, jobject surface)
+{
+    const char* url = env->GetStringUTFChars(jurl, nullptr);
+    PlayerWrapper *player = new PlayerWrapper();
+    player->Init(env, obj, const_cast<char *>(url), playerType, renderType, surface);
+    env->ReleaseStringUTFChars(jurl, url);
+    return reinterpret_cast<jlong>(player);
+}
 
 
 JNIEXPORT void

@@ -22,9 +22,12 @@ include_directories(
 link_directories(
         ${jnilibs}/${ANDROID_ABI})
 
+
 file(GLOB src-files
         ${CMAKE_SOURCE_DIR}/*.cpp
         ${CMAKE_SOURCE_DIR}/v4l2/*.cpp
+        ${CMAKE_SOURCE_DIR}/player/*.cpp
+        ${CMAKE_SOURCE_DIR}/player/decoder/*.cpp
         )
 
 add_library( # Sets the name of the library.
