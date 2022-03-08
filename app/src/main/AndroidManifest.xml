@@ -27,6 +27,7 @@
             android:label="@string/app_name"
             />
         <activity android:name="NativeMediaPlayerActivity"/>
+        <activity android:name="GLMediaPlayerActivity"/>
     </application>
 
 </manifest>

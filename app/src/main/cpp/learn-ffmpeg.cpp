@@ -6,7 +6,7 @@
  *
  * */
 
-#include "jni.h"
+#include <jni.h>
 #include "util/LogUtil.h"
 #include <vector>
 #include <string>
@@ -24,13 +24,34 @@ extern "C" {
 extern "C" {
 #endif
 
+#define  LOG_TAG "learn_ffmpeg"
+
 JNIEXPORT jstring
-JNICALL Java_com_hikvision_ffmpegdemo_ZZFFmpeg_native_1GetFFmpegVersion
+JNICALL Java_com_hikvision_ffmpegdemo_ZZFFmpeg_native_1getFFmpegVersion
         (JNIEnv *env, jclass cls)
 {
     char strBuffer[1024 * 4] = {0};
     strcat(strBuffer,av_version_info());
     return env->NewStringUTF(strBuffer);
+}
+
+
+
+
+JNIEXPORT void
+JNICALL Java_com_hikvision_ffmpegdemo_ZZFFmpeg_native_1vectorTest
+        (JNIEnv *env, jclass cls,jobject vector)
+{
+    jclass vectorString = env->GetObjectClass(vector);
+    //获取成员变量
+    jmethodID vectorStringAdd = env->GetMethodID(vectorString, "get", "(I)Ljava/lang/Object;");
+    //调用方法
+    jobject stringObj=env->CallObjectMethod(vector,vectorStringAdd,0);
+    jstring string_class = reinterpret_cast<jstring>(stringObj);
+    const char *szComPath;
+    szComPath = env->GetStringUTFChars(string_class,0);
+    LOGCATD("%s_______%s", __FUNCTION__,szComPath);
+
 }
 
 

@@ -51,6 +51,9 @@ public class MainActivity extends AppCompatActivity {
                     case FF_ANATIVE_WINDOWS_EXAMPLE:
                         startActivity(new Intent(MainActivity.this, NativeMediaPlayerActivity.class));
                         break;
+                    case FF_OPENGLES_EXAMPLE:
+                        startActivity(new Intent(MainActivity.this, GLMediaPlayerActivity.class));
+                        break;
                     default:
                         break;
                 }
@@ -61,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
     private void initItems() {
         SelectItem foregroundItem = new SelectItem("ANativeWinodow player", R.drawable.lufei);
         selectItemList.add(foregroundItem);
+        SelectItem glTest = new SelectItem("glTest", R.drawable.opengl);
+        selectItemList.add(glTest);
 
     }
 }
