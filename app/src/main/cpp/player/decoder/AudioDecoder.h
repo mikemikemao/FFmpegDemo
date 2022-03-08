@@ -4,7 +4,7 @@
 
 #ifndef FFMPEGDEMO_AUDIODECODER_H
 #define FFMPEGDEMO_AUDIODECODER_H
-
+#include "DecoderBase.h"
 
 class AudioDecoder : public DecoderBase {
 public:

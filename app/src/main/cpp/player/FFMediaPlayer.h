@@ -15,6 +15,8 @@ public:
     virtual ~FFMediaPlayer(){};
 
     virtual void Init(JNIEnv *jniEnv, jobject obj, char *url, int renderType, jobject surface);
+    virtual void Play() ;
+    virtual long GetMediaParams(int paramType);
 
 private:
     VideoDecoder *m_VideoDecoder = nullptr;

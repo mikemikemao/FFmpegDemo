@@ -11,6 +11,12 @@ public class ZZFFmpeg {
 
     public static final int FFMEDIA_PLAYER = 0;
     public static final int HWCODEC_PLAYER = 1;
+
+    public static final int MSG_DECODER_INIT_ERROR      = 0;
+    public static final int MSG_DECODER_READY           = 1;
+    public static final int MSG_DECODER_DONE            = 2;
+    public static final int MSG_REQUEST_RENDER          = 3;
+    public static final int MSG_DECODING_TIME           = 4;
     static {
         System.loadLibrary("learn-ffmpeg");
     }
@@ -29,6 +35,19 @@ public class ZZFFmpeg {
 
     public void init(String url, int videoRenderType, Surface surface) {
         mNativePlayerHandle = native_Init(url, FFMEDIA_PLAYER, videoRenderType, surface);
+    }
+
+    public void play() {
+        native_Play(mNativePlayerHandle);
+    }
+
+    public long getMediaParams(int paramType) {
+        return native_GetMediaParams(mNativePlayerHandle, paramType);
+    }
+
+    private EventCallback mEventCallback = null;
+    public void addEventCallback(EventCallback callback) {
+        mEventCallback = callback;
     }
 
     /**
@@ -51,11 +70,26 @@ public class ZZFFmpeg {
      * @return
      */
     private native long native_Init(String url, int playerType, int renderType, Object surface);
+
+    private native void native_Play(long playerHandle);
+
+
+    private native long native_GetMediaParams(long playerHandle, int paramType);
     /**
      * JNI功能测试 传递vector
      * @param vector
      */
     public static native void native_vectorTest(Vector<String> vector);
+
+    public interface EventCallback {
+        void onPlayerEvent(int msgType, float msgValue);
+    }
+
+    private void playerEventCallback(int msgType, float msgValue) {
+        if(mEventCallback != null)
+            mEventCallback.onPlayerEvent(msgType, msgValue);
+
+    }
 
 
 }

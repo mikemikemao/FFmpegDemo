@@ -11,6 +11,8 @@ public:
     MediaPlayer(){};
     virtual ~MediaPlayer(){};
     virtual void Init(JNIEnv *jniEnv, jobject obj, char *url, int renderType, jobject surface) = 0;
+    virtual void Play() = 0;
+    virtual long GetMediaParams(int paramType) = 0;
     //目前还不知道什么用。。。。。。。
     JavaVM *m_JavaVM = nullptr;
     jobject m_JavaObj = nullptr;

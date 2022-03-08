@@ -28,6 +28,9 @@ file(GLOB src-files
         ${CMAKE_SOURCE_DIR}/v4l2/*.cpp
         ${CMAKE_SOURCE_DIR}/player/*.cpp
         ${CMAKE_SOURCE_DIR}/player/decoder/*.cpp
+        ${CMAKE_SOURCE_DIR}/player/render/*.cpp
+        ${CMAKE_SOURCE_DIR}/player/render/audio/*.cpp
+        ${CMAKE_SOURCE_DIR}/player/render/video/*.cpp
         )
 
 add_library( # Sets the name of the library.

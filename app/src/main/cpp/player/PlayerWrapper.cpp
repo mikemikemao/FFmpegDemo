@@ -33,3 +33,17 @@ void PlayerWrapper::Init(JNIEnv *jniEnv, jobject obj, char *url, int playerType,
     if(m_MediaPlayer)
         m_MediaPlayer->Init(jniEnv, obj, url, renderType, surface);
 }
+
+void PlayerWrapper::Play() {
+    if(m_MediaPlayer) {
+        m_MediaPlayer->Play();
+    }
+}
+
+long PlayerWrapper::GetMediaParams(int paramType) {
+    if(m_MediaPlayer) {
+        return m_MediaPlayer->GetMediaParams(paramType);
+    }
+
+    return 0;
+}

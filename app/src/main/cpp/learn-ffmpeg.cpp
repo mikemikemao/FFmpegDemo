@@ -40,7 +40,8 @@ JNICALL Java_com_hikvision_ffmpegdemo_ZZFFmpeg_native_1getFFmpegVersion
  * Method:    native_Init
  * Signature: (JLjava/lang/String;Ljava/lang/Object;)J
  */
-JNIEXPORT jlong JNICALL Java_com_hikvision_ffmpegdemo_ZZFFmpeg_native_1Init
+JNIEXPORT jlong
+JNICALL Java_com_hikvision_ffmpegdemo_ZZFFmpeg_native_1Init
         (JNIEnv *env, jobject obj, jstring jurl, int playerType, jint renderType, jobject surface)
 {
     const char* url = env->GetStringUTFChars(jurl, nullptr);
@@ -49,6 +50,38 @@ JNIEXPORT jlong JNICALL Java_com_hikvision_ffmpegdemo_ZZFFmpeg_native_1Init
     env->ReleaseStringUTFChars(jurl, url);
     return reinterpret_cast<jlong>(player);
 }
+
+/*
+ * Class:     com_byteflow_learnffmpeg_media_FFMediaPlayer
+ * Method:    native_Play
+ * Signature: (J)V
+ */
+JNIEXPORT void
+JNICALL Java_com_hikvision_ffmpegdemo_ZZFFmpeg_native_1Play
+        (JNIEnv *env, jobject obj, jlong player_handle)
+{
+    if(player_handle != 0)
+    {
+        PlayerWrapper *pPlayerWrapper = reinterpret_cast<PlayerWrapper *>(player_handle);
+        pPlayerWrapper->Play();
+    }
+
+}
+
+JNIEXPORT jlong
+JNICALL Java_com_hikvision_ffmpegdemo_ZZFFmpeg_native_1GetMediaParams(JNIEnv *env, jobject thiz,
+                                                                         jlong player_handle,
+                                                                         jint param_type) {
+    long value = 0;
+    if(player_handle != 0)
+    {
+        PlayerWrapper *ffMediaPlayer = reinterpret_cast<PlayerWrapper *>(player_handle);
+        value = ffMediaPlayer->GetMediaParams(param_type);
+    }
+    return value;
+}
+
+
 
 
 JNIEXPORT void

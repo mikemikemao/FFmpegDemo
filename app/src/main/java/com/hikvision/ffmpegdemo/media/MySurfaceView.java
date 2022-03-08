@@ -2,6 +2,7 @@ package com.hikvision.ffmpegdemo.media;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.SurfaceView;
 
 /**
@@ -24,6 +25,17 @@ public class MySurfaceView extends SurfaceView {
 
     public MySurfaceView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+    }
+
+    public void setAspectRatio(int width, int height) {
+        Log.d(TAG, "setAspectRatio() called with: width = [" + width + "], height = [" + height + "]");
+        if (width < 0 || height < 0) {
+            throw new IllegalArgumentException("Size cannot be negative.");
+        }
+
+        mRatioWidth = width;
+        mRatioHeight = height;
+        requestLayout();
     }
 
 }

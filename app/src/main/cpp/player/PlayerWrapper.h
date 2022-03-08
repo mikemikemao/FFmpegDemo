@@ -15,6 +15,8 @@ public:
     PlayerWrapper(){};
     virtual ~PlayerWrapper(){};
     void Init(JNIEnv *jniEnv, jobject obj, char *url, int playerType, int renderType, jobject surface);
+    void Play();
+    long GetMediaParams(int paramType);
 private:
     //FFMediaPlayer HWCodecPlayer的父类
     MediaPlayer* m_MediaPlayer = nullptr;
