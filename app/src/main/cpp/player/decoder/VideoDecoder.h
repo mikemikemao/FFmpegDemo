@@ -9,6 +9,12 @@
 #include "DecoderBase.h"
 #include "VideoRender.h"
 #include "SingleVideoRecorder.h"
+extern "C" {
+#include <libavutil/imgutils.h>
+#include <libswscale/swscale.h>
+#include <libavcodec/jni.h>
+};
+#include "ImageDef.h"
 
 class VideoDecoder : public DecoderBase{
 
@@ -31,7 +37,7 @@ public:
 private:
     virtual void OnDecoderReady();
     virtual void OnDecoderDone();
-
+    virtual void OnFrameAvailable(AVFrame *frame);
 private:
     int m_VideoWidth = 0;
     int m_VideoHeight = 0;
@@ -39,6 +45,10 @@ private:
     int m_RenderHeight = 0;
     VideoRender *m_VideoRender = nullptr;
     SingleVideoRecorder *m_pVideoRecorder = nullptr;
+    AVFrame *m_RGBAFrame = nullptr;
+    const AVPixelFormat DST_PIXEL_FORMAT = AV_PIX_FMT_RGBA;
+    uint8_t *m_FrameBuffer = nullptr;
+    SwsContext *m_SwsContext = nullptr;
 };
 
 

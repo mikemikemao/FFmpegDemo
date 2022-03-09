@@ -7,6 +7,11 @@
 #include <stdint.h>
 #include "LogUtil.h"
 
+#define IMAGE_FORMAT_RGBA           0x01
+#define IMAGE_FORMAT_NV21           0x02
+#define IMAGE_FORMAT_NV12           0x03
+#define IMAGE_FORMAT_I420           0x04
+
 typedef struct _tag_NativeImage
 {
     int width;

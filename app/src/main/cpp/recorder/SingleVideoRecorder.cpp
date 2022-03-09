@@ -17,7 +17,8 @@ SingleVideoRecorder::SingleVideoRecorder(const char *outUrl, int frameWidth, int
 int SingleVideoRecorder::StartRecord() {
     LOGCATE("SingleVideoRecorder::StartRecord");
     int result = 0;
-    do{
-        result = avformat_alloc_output_context2(&m_pFormatCtx, nullptr, nullptr, m_outUrl);
-    }
+//    do{
+//        result = avformat_alloc_output_context2(&m_pFormatCtx, nullptr, nullptr, m_outUrl);
+//    }
+    return 0;
 }

@@ -16,6 +16,7 @@ extern "C" {
 #include "Decoder.h"
 #define  LOG_TAG "DecoderBase"
 #define MAX_PATH 2048
+#define DELAY_THRESHOLD 100 //100ms
 
 #include "LogUtil.h"
 #define  LOG_TAG "DecoderBase"
@@ -63,14 +64,23 @@ protected:
     virtual void UnInit();
     virtual void OnDecoderReady() = 0;
     virtual void OnDecoderDone() = 0;
+    virtual void OnFrameAvailable(AVFrame *frame) = 0;
     AVCodecContext *GetCodecContext() {
         return m_AVCodecContext;
     }
 private:
     //启动解码线程
     void StartDecodingThread();
-    void DoAVDecoding(DecoderBase *decoder);
-    int InitFFDecoder();
+    static void DoAVDecoding(DecoderBase *decoder);
+    //音视频解码循环
+    void DecodingLoop();
+    int  DecodeOnePacket();
+    int  InitFFDecoder();
+    void UnInitDecoder();
+    virtual void ClearCache()
+    {};
+    void UpdateTimeStamp();
+    long AVSync();
 private:
     //文件地址
     char       m_Url[MAX_PATH] = {0};
@@ -96,6 +106,13 @@ private:
     AVFrame         *m_Frame = nullptr;
     //数据流索引
     int              m_StreamIndex = -1;
+    //当前播放时间
+    long             m_CurTimeStamp = 0;
+    //播放的起始时间
+    long             m_StartTimeStamp = -1;
+    //seek position
+    volatile float      m_SeekPosition = 0;
+    volatile bool       m_SeekSuccess = false;
 
 };
 
