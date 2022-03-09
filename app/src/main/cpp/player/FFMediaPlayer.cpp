@@ -15,6 +15,21 @@ void FFMediaPlayer::Init(JNIEnv *jniEnv, jobject obj, char *url, int videoRender
 
     m_VideoDecoder = new VideoDecoder(url);
     m_AudioDecoder = new AudioDecoder(url);
+
+    if(videoRenderType == VIDEO_RENDER_OPENGL) {
+        //m_VideoDecoder->SetVideoRender(VideoGLRender::GetInstance());
+    } else if (videoRenderType == VIDEO_RENDER_ANWINDOW) {
+        m_VideoRender = new NativeRender(jniEnv, surface);
+        m_VideoDecoder->SetVideoRender(m_VideoRender);
+    } else if (videoRenderType == VIDEO_RENDER_3D_VR) {
+        //m_VideoDecoder->SetVideoRender(VRGLRender::GetInstance());
+    }
+
+    //m_AudioRender = new OpenSLRender();
+    //m_AudioDecoder->SetAudioRender(m_AudioRender);
+
+    m_VideoDecoder->SetMessageCallback(this, PostMessage);
+    m_AudioDecoder->SetMessageCallback(this, PostMessage);
 }
 
 void FFMediaPlayer::Play() {
@@ -44,3 +59,50 @@ long FFMediaPlayer::GetMediaParams(int paramType) {
     return value;
 }
 
+
+JNIEnv *FFMediaPlayer::GetJNIEnv(bool *isAttach) {
+    JNIEnv *env;
+    int status;
+    if (nullptr == m_JavaVM) {
+        LOGCATE("FFMediaPlayer::GetJNIEnv m_JavaVM == nullptr");
+        return nullptr;
+    }
+    *isAttach = false;
+    status = m_JavaVM->GetEnv((void **)&env, JNI_VERSION_1_4);
+    if (status != JNI_OK) {
+        status = m_JavaVM->AttachCurrentThread(&env, nullptr);
+        if (status != JNI_OK) {
+            LOGCATE("FFMediaPlayer::GetJNIEnv failed to attach current thread");
+            return nullptr;
+        }
+        *isAttach = true;
+    }
+    return env;
+}
+
+jobject FFMediaPlayer::GetJavaObj() {
+    return m_JavaObj;
+}
+
+JavaVM *FFMediaPlayer::GetJavaVM() {
+    return m_JavaVM;
+}
+
+
+void FFMediaPlayer::PostMessage(void *context, int msgType, float msgCode) {
+    if(context != nullptr)
+    {
+        FFMediaPlayer *player = static_cast<FFMediaPlayer *>(context);
+        bool isAttach = false;
+        JNIEnv *env = player->GetJNIEnv(&isAttach);
+        LOGCATE("FFMediaPlayer::PostMessage env=%p", env);
+        if(env == nullptr)
+            return;
+        jobject javaObj = player->GetJavaObj();
+        jmethodID mid = env->GetMethodID(env->GetObjectClass(javaObj), JAVA_PLAYER_EVENT_CALLBACK_API_NAME, "(IF)V");
+        env->CallVoidMethod(javaObj, mid, msgType, msgCode);
+        if(isAttach)
+            player->GetJavaVM()->DetachCurrentThread();
+
+    }
+}

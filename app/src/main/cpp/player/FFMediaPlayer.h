@@ -7,6 +7,7 @@
 #include "MediaPlayer.h"
 #include "VideoDecoder.h"
 #include "AudioDecoder.h"
+#include "NativeRender.h"
 
 class FFMediaPlayer : public MediaPlayer {
 
@@ -17,10 +18,20 @@ public:
     virtual void Init(JNIEnv *jniEnv, jobject obj, char *url, int renderType, jobject surface);
     virtual void Play() ;
     virtual long GetMediaParams(int paramType);
+    static void PostMessage(void *context, int msgType, float msgCode);
+
+private:
+    virtual JNIEnv *GetJNIEnv(bool *isAttach);
+    virtual jobject GetJavaObj();
+    virtual JavaVM *GetJavaVM();
+
 
 private:
     VideoDecoder *m_VideoDecoder = nullptr;
     AudioDecoder *m_AudioDecoder = nullptr;
+
+    VideoRender *m_VideoRender = nullptr;
+    AudioRender *m_AudioRender = nullptr;
 };
 
 

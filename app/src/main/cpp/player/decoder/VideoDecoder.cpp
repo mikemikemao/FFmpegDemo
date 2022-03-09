@@ -4,7 +4,6 @@
 
 #include "VideoDecoder.h"
 
-
 void VideoDecoder::OnDecoderReady() {
     LOGCATE("VideoDecoder::OnDecoderReady");
     m_VideoWidth = GetCodecContext()->width;

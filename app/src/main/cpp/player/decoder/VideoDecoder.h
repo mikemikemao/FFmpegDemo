@@ -33,6 +33,10 @@ public:
     {
         return m_VideoHeight;
     }
+    void SetVideoRender(VideoRender *videoRender)
+    {
+        m_VideoRender = videoRender;
+    }
 
 private:
     virtual void OnDecoderReady();
@@ -49,6 +53,7 @@ private:
     const AVPixelFormat DST_PIXEL_FORMAT = AV_PIX_FMT_RGBA;
     uint8_t *m_FrameBuffer = nullptr;
     SwsContext *m_SwsContext = nullptr;
+
 };
 
 

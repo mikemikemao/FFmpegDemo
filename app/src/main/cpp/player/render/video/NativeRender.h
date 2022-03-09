@@ -15,7 +15,8 @@ class NativeRender : public VideoRender {
 public:
     NativeRender(JNIEnv *env, jobject surface);
     virtual ~NativeRender();
-    virtual void Init(int videoWidth, int videoHeight, int *dstSize) = 0;
+    virtual void Init(int videoWidth, int videoHeight, int *dstSize);
+    virtual void UnInit(){};
     void RenderVideoFrame(NativeImage *pImage);
 
 private:
