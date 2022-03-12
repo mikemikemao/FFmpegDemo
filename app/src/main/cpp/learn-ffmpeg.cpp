@@ -26,6 +26,14 @@ extern "C" {
 extern "C" {
 #endif
 
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * ffmpeg
+ *
+ */
+
 JNIEXPORT jstring
 JNICALL Java_com_hikvision_ffmpegdemo_ZZFFmpeg_native_1getFFmpegVersion
         (JNIEnv *env, jclass cls)
@@ -82,7 +90,43 @@ JNICALL Java_com_hikvision_ffmpegdemo_ZZFFmpeg_native_1GetMediaParams(JNIEnv *en
 }
 
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * opengl
+ *
+ */
+#include "MyGLRenderContext.h"
 
+JNIEXPORT void
+JNICALL Java_com_hikvision_ffmpegdemo_ZZFFmpeg_native_1OnSurfaceCreated
+        (JNIEnv *env, jclass cls)
+{
+    MyGLRenderContext::GetInstance()->OnSurfaceCreated();
+}
+
+JNIEXPORT void
+JNICALL Java_com_hikvision_ffmpegdemo_ZZFFmpeg_native_1OnSurfaceChanged
+        (JNIEnv *env, jclass cls,jint width,jint height)
+{
+    MyGLRenderContext::GetInstance()->OnSurfaceChanged(width, height);
+}
+
+JNIEXPORT void
+JNICALL Java_com_hikvision_ffmpegdemo_ZZFFmpeg_native_1OnDrawFrame
+        (JNIEnv *env, jclass cls)
+{
+    MyGLRenderContext::GetInstance()->OnDrawFrame();
+}
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * test
+ *
+ */
 
 JNIEXPORT void
 JNICALL Java_com_hikvision_ffmpegdemo_ZZFFmpeg_native_1vectorTest
@@ -99,9 +143,6 @@ JNICALL Java_com_hikvision_ffmpegdemo_ZZFFmpeg_native_1vectorTest
     LOGCATD("%s_______%s", __FUNCTION__,szComPath);
 
 }
-
-
-
 
 #ifdef __cplusplus
 }

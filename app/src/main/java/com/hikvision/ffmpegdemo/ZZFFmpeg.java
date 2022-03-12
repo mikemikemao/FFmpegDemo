@@ -23,15 +23,14 @@ public class ZZFFmpeg {
     //控制播放的句柄
     private long mNativePlayerHandle = 0;
 
+   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /**
-     * 获取版本
+     * FFMPEG
      * @return
      */
     public static String GetFFmpegVersion() {
         return native_getFFmpegVersion();
     }
-
-
 
     public void init(String url, int videoRenderType, Surface surface) {
         mNativePlayerHandle = native_Init(url, FFMEDIA_PLAYER, videoRenderType, surface);
@@ -50,8 +49,18 @@ public class ZZFFmpeg {
         mEventCallback = callback;
     }
 
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /**
-     * 获取版本
+     * opengl native
+     * @return
+     */
+    public static native void native_OnSurfaceCreated();
+    public static native void native_OnSurfaceChanged(int width, int height);
+    public static native void native_OnDrawFrame();
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * FFmpegNative
      * @return
      */
     private static native String native_getFFmpegVersion();
