@@ -118,6 +118,25 @@ JNICALL Java_com_hikvision_ffmpegdemo_ZZFFmpeg_native_1OnDrawFrame
     MyGLRenderContext::GetInstance()->OnDrawFrame();
 }
 
+#include "v4l2/V4L2Device.h"
+JNIEXPORT void
+        JNICALL Java_com_hikvision_ffmpegdemo_ZZFFmpeg_native_1GetV4l2CamSolution
+(JNIEnv *env, jclass cls,jobject jResolution)
+{
+    V4L2Device v4l2Device;
+    V4L2Device::Resolution resolution;
+    resolution = v4l2Device.sensorResolution();
+    LOGCATD("resolution width =%d height =%d ",resolution.width,resolution.height);
+    jclass objectClass = env->FindClass("com/hikvision/ffmpegdemo/cam/Resolution");
+    jmethodID objectClassSetWidth = env->GetStaticMethodID(objectClass, "setWidth", "(I)V");
+    jmethodID objectClassSetHeight = env->GetStaticMethodID(objectClass, "setHeight", "(I)V");
+    env->CallStaticVoidMethod(objectClass,objectClassSetWidth,resolution.width);
+    env->CallStaticVoidMethod(objectClass,objectClassSetHeight,resolution.height);
+
+}
+
+
+
 
 
 

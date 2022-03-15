@@ -28,6 +28,8 @@
             />
         <activity android:name="NativeMediaPlayerActivity"/>
         <activity android:name="GLMediaPlayerActivity"/>
+        <activity android:name=".cam.V4L2CamActivity"/>
+
     </application>
 
 </manifest>

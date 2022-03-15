@@ -28,8 +28,10 @@ V4L2Device::V4L2Device(const char *devNode)
         : mFd(-1)
         , mConnected(false)
         , mStreaming(false)
-        , mDevNode(devNode) {
+        , mDevNode(devNode){
     memset(&mFormat, 0, sizeof(mFormat));
+    mForcedResolution.width=0;
+    mForcedResolution.height=0;
 }
 
 V4L2Device::~V4L2Device() {
@@ -69,7 +71,7 @@ const vector<V4L2Device::Resolution> & V4L2Device::availableResolutions() {
         frmSize.pixel_format = V4L2DEVICE_PIXEL_FORMAT;
         frmSize.index = 0;
         errno = 0;
-        while(ioctl(mFd, VIDIOC_ENUM_FRAMESIZES, &frmSize) == 0) {
+        while(ioctl(fd, VIDIOC_ENUM_FRAMESIZES, &frmSize) >= 0) {
             LOGCATD("%s: Found resolution: %dx%d", mDevNode, frmSize.discrete.width, frmSize.discrete.height);
             ++frmSize.index;
             mForcedResolution.width = frmSize.discrete.width;

@@ -17,6 +17,8 @@ public class ZZFFmpeg {
     public static final int MSG_DECODER_DONE            = 2;
     public static final int MSG_REQUEST_RENDER          = 3;
     public static final int MSG_DECODING_TIME           = 4;
+
+
     static {
         System.loadLibrary("learn-ffmpeg");
     }
@@ -49,6 +51,12 @@ public class ZZFFmpeg {
         mEventCallback = callback;
     }
 
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * v4l2 native
+     * @return
+     */
+    public static native void native_GetV4l2CamSolution();
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /**

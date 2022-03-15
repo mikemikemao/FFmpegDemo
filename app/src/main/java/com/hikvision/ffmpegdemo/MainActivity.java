@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.hikvision.ffmpegdemo.adapter.SelectItem;
 import com.hikvision.ffmpegdemo.adapter.SelectItemAdapter;
+import com.hikvision.ffmpegdemo.cam.V4L2CamActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int FF_AV_RECORDER = 6;
     private static final int FF_STREAM_MEDIA_PLAYER = 7;
     private static final int FF_MEDIACODEC_PLAYER = 8;
+    private static final int V4L2CAM_EXAMPLE = 2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +56,9 @@ public class MainActivity extends AppCompatActivity {
                     case FF_OPENGLES_EXAMPLE:
                         startActivity(new Intent(MainActivity.this, GLMediaPlayerActivity.class));
                         break;
+                    case V4L2CAM_EXAMPLE:
+                        startActivity(new Intent(MainActivity.this, V4L2CamActivity.class));
+                        break;
                     default:
                         break;
                 }
@@ -66,6 +71,8 @@ public class MainActivity extends AppCompatActivity {
         selectItemList.add(foregroundItem);
         SelectItem glTest = new SelectItem("glTest", R.drawable.opengl);
         selectItemList.add(glTest);
+        SelectItem cam = new SelectItem("camera", R.drawable.cam);
+        selectItemList.add(cam);
 
     }
 }
