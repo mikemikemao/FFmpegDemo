@@ -35,6 +35,11 @@ public:
         UnInit();
     }
 
+    void SetAudioRender(AudioRender *audioRender)
+    {
+        m_AudioRender = audioRender;
+    }
+
 protected:
     virtual void OnDecoderReady();
     virtual void OnDecoderDone();

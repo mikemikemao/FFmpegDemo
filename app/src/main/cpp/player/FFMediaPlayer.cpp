@@ -25,8 +25,8 @@ void FFMediaPlayer::Init(JNIEnv *jniEnv, jobject obj, char *url, int videoRender
         //m_VideoDecoder->SetVideoRender(VRGLRender::GetInstance());
     }
 
-    //m_AudioRender = new OpenSLRender();
-    //m_AudioDecoder->SetAudioRender(m_AudioRender);
+    m_AudioRender = new OpenSLRender();
+    m_AudioDecoder->SetAudioRender(m_AudioRender);
 
     m_VideoDecoder->SetMessageCallback(this, PostMessage);
     m_AudioDecoder->SetMessageCallback(this, PostMessage);

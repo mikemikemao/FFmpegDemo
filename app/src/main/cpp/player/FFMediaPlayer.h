@@ -8,6 +8,7 @@
 #include "VideoDecoder.h"
 #include "AudioDecoder.h"
 #include "NativeRender.h"
+#include "OpenSLRender.h"
 
 class FFMediaPlayer : public MediaPlayer {
 
