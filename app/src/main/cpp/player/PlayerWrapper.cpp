@@ -40,6 +40,20 @@ void PlayerWrapper::Play() {
     }
 }
 
+void PlayerWrapper::Stop() {
+    if(m_MediaPlayer) {
+        m_MediaPlayer->Stop();
+    }
+}
+
+void PlayerWrapper::UnInit() {
+    if(m_MediaPlayer) {
+        m_MediaPlayer->UnInit();
+        delete m_MediaPlayer;
+        m_MediaPlayer = nullptr;
+    }
+}
+
 long PlayerWrapper::GetMediaParams(int paramType) {
     if(m_MediaPlayer) {
         return m_MediaPlayer->GetMediaParams(paramType);

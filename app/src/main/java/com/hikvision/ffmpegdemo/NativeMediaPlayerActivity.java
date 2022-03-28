@@ -86,8 +86,8 @@ public class NativeMediaPlayerActivity extends AppCompatActivity implements Surf
     @Override
     public void surfaceDestroyed(@NonNull SurfaceHolder holder) {
         Log.d(TAG, "surfaceDestroyed() called with: surfaceHolder = [" + holder + "]");
-        //zzfFmpeg.stop();
-        //zzfFmpeg.unInit();
+        zzfFmpeg.stop();
+        zzfFmpeg.unInit();
     }
 
     @Override

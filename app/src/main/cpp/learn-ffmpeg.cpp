@@ -76,6 +76,43 @@ JNICALL Java_com_hikvision_ffmpegdemo_ZZFFmpeg_native_1Play
 
 }
 
+
+/*
+ * Class:     com_byteflow_learnffmpeg_media_FFMediaPlayer
+ * Method:    native_Play
+ * Signature: (J)V
+ */
+JNIEXPORT void
+JNICALL Java_com_hikvision_ffmpegdemo_ZZFFmpeg_native_1Stop
+        (JNIEnv *env, jobject obj, jlong player_handle)
+{
+    if(player_handle != 0)
+    {
+        PlayerWrapper *pPlayerWrapper = reinterpret_cast<PlayerWrapper *>(player_handle);
+        pPlayerWrapper->Stop();
+    }
+
+}
+
+/*
+ * Class:     com_byteflow_learnffmpeg_media_FFMediaPlayer
+ * Method:    native_Play
+ * Signature: (J)V
+ */
+JNIEXPORT void
+JNICALL Java_com_hikvision_ffmpegdemo_ZZFFmpeg_native_1UnInit
+        (JNIEnv *env, jobject obj, jlong player_handle)
+{
+    if(player_handle != 0)
+    {
+        PlayerWrapper *pPlayerWrapper = reinterpret_cast<PlayerWrapper *>(player_handle);
+        pPlayerWrapper->UnInit();
+        delete pPlayerWrapper;
+
+    }
+
+}
+
 JNIEXPORT jlong
 JNICALL Java_com_hikvision_ffmpegdemo_ZZFFmpeg_native_1GetMediaParams(JNIEnv *env, jobject thiz,
                                                                          jlong player_handle,

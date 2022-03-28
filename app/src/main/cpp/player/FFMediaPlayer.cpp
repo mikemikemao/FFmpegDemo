@@ -41,6 +41,47 @@ void FFMediaPlayer::Play() {
         m_AudioDecoder->Start();
 }
 
+void FFMediaPlayer::Stop() {
+    LOGCATE("FFMediaPlayer::Stop");
+    if(m_VideoDecoder)
+        m_VideoDecoder->Stop();
+
+    if(m_AudioDecoder)
+        m_AudioDecoder->Stop();
+}
+
+
+void FFMediaPlayer::UnInit() {
+    LOGCATE("FFMediaPlayer::UnInit");
+    if(m_VideoDecoder) {
+        delete m_VideoDecoder;
+        m_VideoDecoder = nullptr;
+    }
+
+    if(m_VideoRender) {
+        delete m_VideoRender;
+        m_VideoRender = nullptr;
+    }
+
+    if(m_AudioDecoder) {
+        delete m_AudioDecoder;
+        m_AudioDecoder = nullptr;
+    }
+
+    if(m_AudioRender) {
+        delete m_AudioRender;
+        m_AudioRender = nullptr;
+    }
+
+    //VideoGLRender::ReleaseInstance();
+
+    bool isAttach = false;
+    GetJNIEnv(&isAttach)->DeleteGlobalRef(m_JavaObj);
+    if(isAttach)
+        GetJavaVM()->DetachCurrentThread();
+
+}
+
 long FFMediaPlayer::GetMediaParams(int paramType) {
     LOGCATE("FFMediaPlayer::GetMediaParams paramType=%d", paramType);
     long value = 0;

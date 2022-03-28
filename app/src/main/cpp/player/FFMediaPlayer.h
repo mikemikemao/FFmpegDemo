@@ -17,7 +17,9 @@ public:
     virtual ~FFMediaPlayer(){};
 
     virtual void Init(JNIEnv *jniEnv, jobject obj, char *url, int renderType, jobject surface);
-    virtual void Play() ;
+    virtual void Play();
+    virtual void Stop();
+    virtual void UnInit();
     virtual long GetMediaParams(int paramType);
     static void PostMessage(void *context, int msgType, float msgCode);
 

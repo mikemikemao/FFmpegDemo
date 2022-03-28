@@ -42,6 +42,14 @@ public class ZZFFmpeg {
         native_Play(mNativePlayerHandle);
     }
 
+    public void stop() {
+        native_Stop(mNativePlayerHandle);
+    }
+    public void unInit() {
+        native_UnInit(mNativePlayerHandle);
+    }
+
+
     public long getMediaParams(int paramType) {
         return native_GetMediaParams(mNativePlayerHandle, paramType);
     }
@@ -90,6 +98,9 @@ public class ZZFFmpeg {
 
     private native void native_Play(long playerHandle);
 
+    private native void native_Stop(long playerHandle);
+
+    private native void native_UnInit(long playerHandle);
 
     private native long native_GetMediaParams(long playerHandle, int paramType);
     /**
