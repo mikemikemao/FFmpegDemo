@@ -31,7 +31,7 @@ public class AudioActivity extends AppCompatActivity implements View.OnClickList
         assetManager=getAssets();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.P)
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -39,12 +39,20 @@ public class AudioActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.tv_getAudioCurve://API28 android9以上能用 以下用dumpsys media.audio_policy代替
                 AudioManager audioManager = (AudioManager) getSystemService(this.AUDIO_SERVICE);
-                int minIndex = audioManager.getStreamMinVolume (AudioManager.STREAM_MUSIC);
-                int maxIndex = audioManager.getStreamMaxVolume (AudioManager.STREAM_MUSIC);
-                for(int i=minIndex+1; i<maxIndex; i++) {
-                    float db = audioManager.getStreamVolumeDb(AudioManager.STREAM_MUSIC, i, AudioDeviceInfo.TYPE_WIRED_HEADSET);
-                    Log.d(TAG, "volume db = " + db + "  at index= " + i);
+                int minIndex = 0;
+                int maxIndex = 0;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
+                    minIndex = audioManager.getStreamMinVolume (AudioManager.STREAM_MUSIC);
+                    maxIndex = audioManager.getStreamMaxVolume (AudioManager.STREAM_MUSIC);
+                    for(int i=minIndex+1; i<maxIndex; i++) {
+                        float db = audioManager.getStreamVolumeDb(AudioManager.STREAM_MUSIC, i, AudioDeviceInfo.TYPE_WIRED_HEADSET);
+                        Log.d(TAG, "volume db = " + db + "  at index= " + i);
+                    }
+                }else {
+                    Log.d(TAG, "API28 android9以上能用 以下用dumpsys media.audio_policy代替");
                 }
+
+
                 break;
             default:
                 break;
