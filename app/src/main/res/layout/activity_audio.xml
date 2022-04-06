@@ -13,6 +13,12 @@
         android:layout_height="wrap_content"
         style="@style/itemMargin"
         android:text="播放声音>"/>
+    <TextView
+        android:id="@+id/tv_getAudioCurve"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/itemMargin"
+        android:text="获取音量曲线>"/>
 
 
 
