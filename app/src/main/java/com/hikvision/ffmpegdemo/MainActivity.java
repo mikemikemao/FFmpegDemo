@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.hikvision.ffmpegdemo.adapter.SelectItem;
 import com.hikvision.ffmpegdemo.adapter.SelectItemAdapter;
+import com.hikvision.ffmpegdemo.audio.AudioActivity;
 import com.hikvision.ffmpegdemo.cam.V4L2CamActivity;
 
 import java.util.ArrayList;
@@ -22,14 +23,8 @@ public class MainActivity extends AppCompatActivity {
     private List<SelectItem> selectItemList = new ArrayList<>();
     private static final int FF_ANATIVE_WINDOWS_EXAMPLE = 0;
     private static final int FF_OPENGLES_EXAMPLE = 1;
-    private static final int FF_OPENGLES_AUDIO_VISUAL_EXAMPLE = 2;
-    private static final int FF_OPENGLES_VR_EXAMPLE = 3;
-    private static final int FF_X264_VIDEO_RECORDER = 4;
-    private static final int FF_FDK_AAC_AUDIO_RECORDER = 5;
-    private static final int FF_AV_RECORDER = 6;
-    private static final int FF_STREAM_MEDIA_PLAYER = 7;
-    private static final int FF_MEDIACODEC_PLAYER = 8;
     private static final int V4L2CAM_EXAMPLE = 2;
+    private static final int Audio_EXAMPLE = 3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +54,9 @@ public class MainActivity extends AppCompatActivity {
                     case V4L2CAM_EXAMPLE:
                         startActivity(new Intent(MainActivity.this, V4L2CamActivity.class));
                         break;
+                    case Audio_EXAMPLE:
+                        startActivity(new Intent(MainActivity.this, AudioActivity.class));
+                        break;
                     default:
                         break;
                 }
@@ -73,6 +71,8 @@ public class MainActivity extends AppCompatActivity {
         selectItemList.add(glTest);
         SelectItem cam = new SelectItem("camera", R.drawable.cam);
         selectItemList.add(cam);
+        SelectItem speaker = new SelectItem("speaker", R.drawable.laba);
+        selectItemList.add(speaker);
 
     }
 }
