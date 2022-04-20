@@ -73,14 +73,12 @@ class GLSampleBase
 {
 public:
 	GLSampleBase()
+		:m_ProgramObj(0)
+		,m_VertexShader(0)
+		,m_FragmentShader(0)
+		,m_SurfaceWidth(0)
+		,m_SurfaceHeight(0)
 	{
-		m_ProgramObj = 0;
-		m_VertexShader = 0;
-		m_FragmentShader = 0;
-
-		m_SurfaceWidth = 0;
-		m_SurfaceHeight = 0;
-
 	}
 
 	virtual ~GLSampleBase()

@@ -9,10 +9,10 @@ GLuint GLUtils::LoadShader(GLenum shaderType, const char *pSource)
     GLuint shader = 0;
 	FUN_BEGIN_TIME("GLUtils::LoadShader")
 	    //创建着色器
-        shader = glCreateShader(shaderType);
+        shader = glCreateShader(shaderType); //1.我们首先要做的是创建一个着色器对象，注意还是用ID来引用的。所以我们储存这个顶点着色器为unsigned int，然后用glCreateShader创建这个着色器：
         if (shader)
         {
-            //把着色器源码附加到着色器上 然后编译
+            //2.把着色器源码附加到着色器上 然后编译
             glShaderSource(shader, 1, &pSource, NULL);
             glCompileShader(shader);
             GLint compiled = 0;
@@ -46,9 +46,10 @@ GLuint GLUtils::CreateProgram(const char *pVertexShaderSource, const char *pFrag
 {
     GLuint program = 0;
     FUN_BEGIN_TIME("GLUtils::CreateProgram")
-        //顶点着色器
+        //顶点着色器 读取并编译着色器 得到一个对象
         vertexShaderHandle = LoadShader(GL_VERTEX_SHADER, pVertexShaderSource);
         if (!vertexShaderHandle) return program;
+        //fragment shader
         fragShaderHandle = LoadShader(GL_FRAGMENT_SHADER, pFragShaderSource);
         if (!fragShaderHandle) return program;
         //创建着色器程序
@@ -58,7 +59,7 @@ GLuint GLUtils::CreateProgram(const char *pVertexShaderSource, const char *pFrag
             //附加顶点着色器
             glAttachShader(program, vertexShaderHandle);
             CheckGLError("glAttachShader");
-            //附加几何着色器
+            //附加片段着色器
             glAttachShader(program, fragShaderHandle);
             CheckGLError("glAttachShader");
             //链接
