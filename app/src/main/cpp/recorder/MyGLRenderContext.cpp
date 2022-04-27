@@ -78,3 +78,59 @@ void MyGLRenderContext::OnDrawFrame()
         m_pCurSample->Draw(m_ScreenW, m_ScreenH);
     }
 }
+
+
+void MyGLRenderContext::SetParamsInt(int paramType, int value0, int value1) {
+    LOGCATE("MyGLRenderContext::SetParamsInt paramType = %d, value0 = %d, value1 = %d", paramType,
+            value0, value1);
+    if (paramType == SAMPLE_TYPE) {
+        m_pBeforeSample = m_pCurSample;
+
+        LOGCATE("MyGLRenderContext::SetParamsInt 0 m_pBeforeSample = %p", m_pBeforeSample);
+        switch (value0) {
+            case SAMPLE_TYPE_KEY_TRIANGLE:
+                m_pCurSample = new TriangleSample();
+                break;
+            case SAMPLE_TYPE_KEY_TEXTURE_MAP:
+                m_pCurSample = new TextureMapSample();
+                break;
+            default:
+                m_pCurSample = nullptr;
+                break;
+        }
+        LOGCATE("MyGLRenderContext::SetParamsInt m_pBeforeSample = %p, m_pCurSample=%p", m_pBeforeSample, m_pCurSample);
+    }
+
+}
+
+
+
+void MyGLRenderContext::SetImageData(int format, int width, int height, uint8_t *pData)
+{
+    LOGCATE("MyGLRenderContext::SetImageData format=%d, width=%d, height=%d, pData=%p", format, width, height, pData);
+    NativeImage nativeImage;
+    nativeImage.format = format;
+    nativeImage.width = width;
+    nativeImage.height = height;
+    nativeImage.ppPlane[0] = pData;
+
+    switch (format)
+    {
+        case IMAGE_FORMAT_NV12:
+        case IMAGE_FORMAT_NV21:
+            nativeImage.ppPlane[1] = nativeImage.ppPlane[0] + width * height;
+            break;
+        case IMAGE_FORMAT_I420:
+            nativeImage.ppPlane[1] = nativeImage.ppPlane[0] + width * height;
+            nativeImage.ppPlane[2] = nativeImage.ppPlane[1] + width * height / 4;
+            break;
+        default:
+            break;
+    }
+
+    if (m_pCurSample)
+    {
+        m_pCurSample->LoadImage(&nativeImage);
+    }
+
+}

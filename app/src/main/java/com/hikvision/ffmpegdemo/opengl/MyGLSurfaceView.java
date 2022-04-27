@@ -14,16 +14,14 @@ import android.util.Log;
 public class MyGLSurfaceView extends GLSurfaceView {
     private static final String TAG = "MyGLSurfaceView";
     private MyGLRender mGLRender;
-    public MyGLSurfaceView(Context context) {
-        super(context);
-        Log.d(TAG, "MyGLSurfaceView: 1");
+    public MyGLSurfaceView(Context context,MyGLRender glRender) {
+        this(context, glRender, null);
     }
-
-    public MyGLSurfaceView(Context context, AttributeSet attrs) {
+    public MyGLSurfaceView(Context context,MyGLRender glRender,AttributeSet attrs) {
         super(context, attrs);
         Log.d(TAG, "MyGLSurfaceView: 2");
         this.setEGLContextClientVersion(2);
-        mGLRender = new MyGLRender();
+        mGLRender = glRender;
         setRenderer(mGLRender);
         setRenderMode(RENDERMODE_WHEN_DIRTY);
     }

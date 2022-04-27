@@ -2,4 +2,8 @@
     <string name="app_name">FFmpegDemo</string>
     <string name="title_name">FFmpeg Version</string>
     <string name="err_permission">Permission Error</string>
+
+    <!--opengl test-->
+    <string name="gl_triangle">gl_triangle</string>
+    <string name="gl_txtMap">gl_txtMap</string>
 </resources>

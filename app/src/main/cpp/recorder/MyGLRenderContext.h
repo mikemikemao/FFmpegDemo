@@ -9,6 +9,7 @@
 #include "LogUtil.h"
 #include "GLSampleBase.h"
 #include "TriangleSample.h"
+#include "TextureMapSample.h"
 
 class MyGLRenderContext {
 public:
@@ -19,6 +20,8 @@ public:
     void OnSurfaceCreated();
     void OnSurfaceChanged(int width, int height);
     void OnDrawFrame();
+    void SetParamsInt(int paramType, int value0, int value1);
+    void SetImageData(int format, int width, int height, uint8_t *pData);
 private:
     static MyGLRenderContext *m_pContext;
     GLSampleBase *m_pBeforeSample;

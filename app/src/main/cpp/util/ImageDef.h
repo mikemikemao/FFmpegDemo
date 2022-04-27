@@ -6,6 +6,9 @@
 #define FFMPEGDEMO_IMAGEDEF_H
 #include <stdint.h>
 #include "LogUtil.h"
+#include <malloc.h>
+#include <string.h>
+#include <unistd.h>
 
 #define IMAGE_FORMAT_RGBA           0x01
 #define IMAGE_FORMAT_NV21           0x02

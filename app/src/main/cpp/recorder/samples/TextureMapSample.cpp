@@ -127,6 +127,7 @@ void TextureMapSample::LoadImage(NativeImage *pImage)
 		m_RenderImage.width = pImage->width;
 		m_RenderImage.height = pImage->height;
 		m_RenderImage.format = pImage->format;
+		LOGCATE("TextureMapSample::LoadImage m_RenderImage.width=%d m_RenderImage.height=%d m_RenderImage.format=%d", pImage->width,pImage->height,pImage->format);
 		NativeImageUtil::CopyNativeImage(pImage, &m_RenderImage);
 	}
 }

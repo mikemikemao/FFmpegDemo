@@ -135,25 +135,55 @@ JNICALL Java_com_hikvision_ffmpegdemo_ZZFFmpeg_native_1GetMediaParams(JNIEnv *en
 #include "MyGLRenderContext.h"
 
 JNIEXPORT void
-JNICALL Java_com_hikvision_ffmpegdemo_ZZFFmpeg_native_1OnSurfaceCreated
+JNICALL Java_com_hikvision_ffmpegdemo_ZZOpenglNative_native_1OnSurfaceCreated
         (JNIEnv *env, jclass cls)
 {
     MyGLRenderContext::GetInstance()->OnSurfaceCreated();
 }
 
 JNIEXPORT void
-JNICALL Java_com_hikvision_ffmpegdemo_ZZFFmpeg_native_1OnSurfaceChanged
+JNICALL Java_com_hikvision_ffmpegdemo_ZZOpenglNative_native_1OnSurfaceChanged
         (JNIEnv *env, jclass cls,jint width,jint height)
 {
     MyGLRenderContext::GetInstance()->OnSurfaceChanged(width, height);
 }
 
 JNIEXPORT void
-JNICALL Java_com_hikvision_ffmpegdemo_ZZFFmpeg_native_1OnDrawFrame
+JNICALL Java_com_hikvision_ffmpegdemo_ZZOpenglNative_native_1OnDrawFrame
         (JNIEnv *env, jclass cls)
 {
     MyGLRenderContext::GetInstance()->OnDrawFrame();
 }
+
+/*
+ * Class:     com_byteflow_app_MyNativeRender
+ * Method:    native_SetParamsInt
+ * Signature: (III)V
+ */
+JNIEXPORT void
+JNICALL Java_com_hikvision_ffmpegdemo_ZZOpenglNative_native_1SetParamsInt
+        (JNIEnv *env, jclass cls, jint paramType, jint value0, jint value1)
+{
+    MyGLRenderContext::GetInstance()->SetParamsInt(paramType, value0, value1);
+}
+
+/*
+ * Class:     com_byteflow_app_MyNativeRender
+ * Method:    native_SetImageData
+ * Signature: (III[B)V
+ */
+JNIEXPORT void
+JNICALL Java_com_hikvision_ffmpegdemo_ZZOpenglNative_native_1SetImageData
+        (JNIEnv *env, jclass cls, jint format, jint width, jint height, jbyteArray imageData)
+{
+    int len = env->GetArrayLength (imageData);
+    uint8_t* buf = new uint8_t[len];
+    env->GetByteArrayRegion(imageData, 0, len, reinterpret_cast<jbyte*>(buf));
+    MyGLRenderContext::GetInstance()->SetImageData(format, width, height, buf);
+    delete[] buf;
+    env->DeleteLocalRef(imageData);
+}
+
 
 #include "v4l2/V4L2Device.h"
 JNIEXPORT void
