@@ -14,6 +14,7 @@ import com.hikvision.ffmpegdemo.adapter.SelectItem;
 import com.hikvision.ffmpegdemo.adapter.SelectItemAdapter;
 import com.hikvision.ffmpegdemo.audio.AudioActivity;
 import com.hikvision.ffmpegdemo.cam.V4L2CamActivity;
+import com.hikvision.ffmpegdemo.opengl.GLMediaPlayerActivity;
 
 import java.util.ArrayList;
 import java.util.List;

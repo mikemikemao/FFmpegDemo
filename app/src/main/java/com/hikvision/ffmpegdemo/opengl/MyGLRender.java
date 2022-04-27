@@ -1,9 +1,15 @@
 package com.hikvision.ffmpegdemo.opengl;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.opengl.GLSurfaceView;
 import android.util.Log;
 
 import com.hikvision.ffmpegdemo.ZZFFmpeg;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.ByteBuffer;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
@@ -32,4 +38,5 @@ public class MyGLRender implements GLSurfaceView.Renderer {
     public void onDrawFrame(GL10 gl) {
         mNativeRender.native_OnDrawFrame();
     }
+
 }

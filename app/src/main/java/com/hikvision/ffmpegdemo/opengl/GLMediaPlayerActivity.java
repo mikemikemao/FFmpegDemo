@@ -1,8 +1,16 @@
-package com.hikvision.ffmpegdemo;
+package com.hikvision.ffmpegdemo.opengl;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.hikvision.ffmpegdemo.R;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.ByteBuffer;
 
 /**
  * description ： TODO:类的作用
