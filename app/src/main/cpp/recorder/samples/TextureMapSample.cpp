@@ -21,8 +21,8 @@ void TextureMapSample::Init()
 {
 	//create RGBA texture
 	glGenTextures(1, &m_TextureId); //函数首先需要输入生成纹理的数量，然后把它们储存在第二个参数的unsigned int数组中
-	glBindTexture(GL_TEXTURE_2D, m_TextureId);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glBindTexture(GL_TEXTURE_2D, m_TextureId);//绑定纹理
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);//设置环绕方式 过滤方式
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
