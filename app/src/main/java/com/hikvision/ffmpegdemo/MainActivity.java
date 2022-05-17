@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.hikvision.ffmpegdemo.adapter.SelectItem;
 import com.hikvision.ffmpegdemo.adapter.SelectItemAdapter;
 import com.hikvision.ffmpegdemo.audio.AudioActivity;
+import com.hikvision.ffmpegdemo.cam.Cam2Activity;
 import com.hikvision.ffmpegdemo.cam.V4L2CamActivity;
 import com.hikvision.ffmpegdemo.opengl.GLMediaPlayerActivity;
 
@@ -53,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(new Intent(MainActivity.this, GLMediaPlayerActivity.class));
                         break;
                     case V4L2CAM_EXAMPLE:
-                        startActivity(new Intent(MainActivity.this, V4L2CamActivity.class));
+                        startActivity(new Intent(MainActivity.this, Cam2Activity.class));
                         break;
                     case Audio_EXAMPLE:
                         startActivity(new Intent(MainActivity.this, AudioActivity.class));

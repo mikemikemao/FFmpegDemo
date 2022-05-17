@@ -30,6 +30,7 @@
         <activity android:name=".opengl.GLMediaPlayerActivity"/>
         <activity android:name=".cam.V4L2CamActivity"/>
         <activity android:name=".audio.AudioActivity"/>
+        <activity android:name=".cam.Cam2Activity"/>
 
     </application>
 
