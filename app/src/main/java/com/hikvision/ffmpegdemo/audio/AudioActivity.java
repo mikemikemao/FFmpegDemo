@@ -1,5 +1,9 @@
 package com.hikvision.ffmpegdemo.audio;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.AssetManager;
 import android.media.AudioDeviceInfo;
 import android.media.AudioManager;
@@ -7,6 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +27,7 @@ import com.hikvision.ffmpegdemo.R;
 public class AudioActivity extends AppCompatActivity implements View.OnClickListener{
     private static final String TAG = "AudioActivity";
     AssetManager assetManager;
+    HeadsetDetectReceiver mHeadsetDetectReceiver;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +35,11 @@ public class AudioActivity extends AppCompatActivity implements View.OnClickList
         findViewById(R.id.tv_playPCM).setOnClickListener(this);
         findViewById(R.id.tv_getAudioCurve).setOnClickListener(this);
         assetManager=getAssets();
+        //注册
+        mHeadsetDetectReceiver = new HeadsetDetectReceiver();
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("android.intent.action.HEADSET_PLUG");
+        registerReceiver(mHeadsetDetectReceiver, intentFilter);
     }
 
 
@@ -57,6 +68,27 @@ public class AudioActivity extends AppCompatActivity implements View.OnClickList
             default:
                 break;
         }
+    }
+
+    public class HeadsetDetectReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.hasExtra("state")) {
+                if (intent.getIntExtra("state", 0) == 0) {
+                    Toast.makeText(context, "没有插入耳机", Toast.LENGTH_SHORT).show();
+                } else if (intent.getIntExtra("state", 0) == 1) {
+                    Toast.makeText(context, "耳机已插入", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+        }
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        unregisterReceiver(mHeadsetDetectReceiver);
+        super.onDestroy();
     }
 
 }

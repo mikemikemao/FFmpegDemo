@@ -37,7 +37,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class Camera2Wrapper {
     private static final String TAG = "Camera2Wrapper";
-    private static final int DEFAULT_CAMERA_ID = 1;
+    private static final int DEFAULT_CAMERA_ID = 0;
     private final float THRESHOLD = 0.001f;
 
     private Context mContext;
@@ -124,7 +124,9 @@ public class Camera2Wrapper {
         }
         return isSupported;
     }
-
+    /**
+     * camera 支持的分辨率
+     * */
     private void getCameraInfo(String cameraId) {
         CameraCharacteristics characteristics = null;
         try {
@@ -189,6 +191,10 @@ public class Camera2Wrapper {
 
     }
 
+    public String getCameraId() {
+        return mCameraId;
+    }
+
     public void startCamera() {
         startBackgroundThread();
         if (mPreviewImageReader == null && mPreviewSize != null) {
@@ -205,10 +211,36 @@ public class Camera2Wrapper {
         openCamera();
     }
 
+    public void stopCamera() {
+        if (mPreviewImageReader != null) {
+            mPreviewImageReader.setOnImageAvailableListener(null, null);
+        }
+
+        if (mCaptureImageReader != null) {
+            mCaptureImageReader.setOnImageAvailableListener(null, null);
+        }
+        closeCamera();
+        stopBackgroundThread();
+    }
+
+
     private void startBackgroundThread() {
         mBackgroundThread = new HandlerThread("Camera2Background");
         mBackgroundThread.start();
         mBackgroundHandler = new Handler(mBackgroundThread.getLooper());
+    }
+
+    private void stopBackgroundThread() {
+        if (mBackgroundThread != null) {
+            mBackgroundThread.quitSafely();
+            try {
+                mBackgroundThread.join();
+                mBackgroundThread = null;
+                mBackgroundHandler = null;
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private void openCamera() {

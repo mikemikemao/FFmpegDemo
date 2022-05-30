@@ -233,3 +233,12 @@ JNICALL Java_com_hikvision_ffmpegdemo_ZZFFmpeg_native_1vectorTest
 #ifdef __cplusplus
 }
 #endif
+
+
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_hikvision_ffmpegdemo_media_MediaRecorderContext_native_1CreateContext(JNIEnv *env,
+                                                                               jobject thiz) {
+    //MediaRecorderContext::CreateContext(env, thiz);
+}
+
