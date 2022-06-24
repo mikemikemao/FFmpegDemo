@@ -19,6 +19,7 @@ import java.nio.ByteBuffer;
 
 import static android.opengl.GLSurfaceView.RENDERMODE_WHEN_DIRTY;
 import static com.hikvision.ffmpegdemo.ZZOpenglNative.SAMPLE_TYPE;
+import static com.hikvision.ffmpegdemo.opengl.MyGLRender.IMAGE_FORMAT_NV21;
 import static com.hikvision.ffmpegdemo.opengl.MyGLRender.IMAGE_FORMAT_RGBA;
 
 /**
@@ -45,6 +46,7 @@ public class GLMediaPlayerActivity extends AppCompatActivity implements View.OnC
 
         findViewById(R.id.tv_glTriangle).setOnClickListener(this);
         findViewById(R.id.tv_glTxtMap).setOnClickListener(this);
+        findViewById(R.id.tv_glNV21Map).setOnClickListener(this);
     }
 
     @Override
@@ -71,6 +73,11 @@ public class GLMediaPlayerActivity extends AppCompatActivity implements View.OnC
                 Log.d(TAG, "onClick: glTxtMap");
                 mGLRender.setParamsInt(SAMPLE_TYPE, SAMPLE_TYPE+1, 0);
                 loadRGBAImage(R.drawable.dzzz);
+                break;
+            case R.id.tv_glNV21Map:
+                Log.d(TAG, "onClick: glNV21Map");
+                mGLRender.setParamsInt(SAMPLE_TYPE, SAMPLE_TYPE+2, 0);
+                loadNV21Image();
                 break;
             default:
                 break;
@@ -106,5 +113,34 @@ public class GLMediaPlayerActivity extends AppCompatActivity implements View.OnC
             }
         }
         return bitmap;
+    }
+
+    private void loadNV21Image() {
+        InputStream is = null;
+        try {
+            is = getAssets().open("YUV_Image_840x1074.NV21");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        int lenght = 0;
+        try {
+            lenght = is.available();
+            byte[] buffer = new byte[lenght];
+            is.read(buffer);
+            mGLRender.setImageData(IMAGE_FORMAT_NV21, 840, 1074, buffer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try
+            {
+                is.close();
+            }
+            catch(IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+
     }
 }

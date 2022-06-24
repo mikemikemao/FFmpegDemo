@@ -14,6 +14,7 @@ public class ZZOpenglNative {
     public static final int SAMPLE_TYPE  =  200;
     public static final int SAMPLE_TYPE_TRIANGLE                = SAMPLE_TYPE;
     public static final int SAMPLE_TYPE_TEXTURE_MAP             = SAMPLE_TYPE + 1;
+    public static final int SAMPLE_TYPE_NV21_MAP                = SAMPLE_TYPE + 2;
 
     public static native void native_OnSurfaceCreated();
     public static native void native_OnSurfaceChanged(int width, int height);
