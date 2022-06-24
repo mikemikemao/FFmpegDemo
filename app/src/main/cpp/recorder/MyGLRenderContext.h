@@ -11,6 +11,8 @@
 #include "TriangleSample.h"
 #include "TextureMapSample.h"
 #include "NV21TextureMapSample.h"
+#include "VaoSample.h"
+#include "FBOSample.h"
 
 class MyGLRenderContext {
 public:

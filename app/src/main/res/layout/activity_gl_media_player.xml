@@ -29,6 +29,18 @@
             android:padding="10dp"
             android:id="@+id/tv_glNV21Map"
             android:text="@string/gl_nv21Map"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:id="@+id/tv_glVAO"
+            android:text="@string/gl_VAO"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:id="@+id/tv_glFBO"
+            android:text="@string/gl_FBO"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"

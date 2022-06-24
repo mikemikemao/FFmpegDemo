@@ -7,4 +7,6 @@
     <string name="gl_triangle">gl_triangle</string>
     <string name="gl_txtMap">gl_txtMap</string>
     <string name="gl_nv21Map">gl_nv21Map</string>
+    <string name="gl_VAO">gl_VAO</string>
+    <string name="gl_FBO">gl_VFBO</string>
 </resources>
