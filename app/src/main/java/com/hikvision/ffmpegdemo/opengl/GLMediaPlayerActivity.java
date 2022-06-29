@@ -49,6 +49,7 @@ public class GLMediaPlayerActivity extends AppCompatActivity implements View.OnC
         findViewById(R.id.tv_glNV21Map).setOnClickListener(this);
         findViewById(R.id.tv_glVAO).setOnClickListener(this);
         findViewById(R.id.tv_glFBO).setOnClickListener(this);
+        findViewById(R.id.tv_glEGL).setOnClickListener(this);
     }
 
     @Override
@@ -90,6 +91,10 @@ public class GLMediaPlayerActivity extends AppCompatActivity implements View.OnC
                 mGLRender.setParamsInt(SAMPLE_TYPE, SAMPLE_TYPE+4, 0);
                 loadRGBAImage(R.drawable.java);
                 break;
+            case R.id.tv_glEGL:
+                Log.d(TAG, "onClick: glNV21Map");
+                mGLRender.setParamsInt(SAMPLE_TYPE, SAMPLE_TYPE+5, 0);
+                loadRGBAImage(R.drawable.leg);
             default:
                 break;
         }
